@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Health Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #f0f4f8;
+      color: #333;
+    }
+
+    header {
+      background: #0074d9;
+      color: white;
+      text-align: center;
+      padding: 1.5em;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 1.5em;
+    }
+
+    h2 {
+      color: #0074d9;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 1em;
+      margin-bottom: 1.5em;
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 0.5em;
+      display: block;
+    }
+
+    input[type="text"], select, textarea {
+      width: 100%;
+      padding: 0.75em;
+      margin-top: 0.5em;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 1em;
+      background: #0074d9;
+      color: white;
+      padding: 0.7em 1.5em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #005fa3;
+    }
+
+    .tip-box {
+      background: #e0f7fa;
+      padding: 1em;
+      border-left: 5px solid #0074d9;
+      margin-top: 1em;
+      font-style: italic;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Daily Health Dashboard</h1>
+</header>
+
+<div class="container">
+
+  <!-- Mood and Energy Tracking -->
+  <div class="card">
+    <h2>Today's Check-In</h2>
+    <label for="mood">How do you feel today?</label>
+    <select id="mood">
+      <option>😊 Happy</option>
+      <option>😐 Okay</option>
+      <option>😔 Sad</option>
+      <option>😡 Angry</option>
+    </select>
+
+    <label for="energy">Energy Level (1-10):</label>
+    <input type="text" id="energy" placeholder="e.g., 7" />
+
+    <label for="symptoms">Any Symptoms?</label>
+    <textarea id="symptoms" rows="3" placeholder="e.g., headache, fatigue..."></textarea>
+
+    <button onclick="saveCheckIn()">Save Check-In</button>
+  </div>
+
+  <!-- Medication Checklist -->
+  <div class="card">
+    <h2>Medication Checklist</h2>
+    <ul id="medList">
+      <li><input type="checkbox" /> Morning Vitamin</li>
+      <li><input type="checkbox" /> Blood Pressure Pill</li>
+      <li><input type="checkbox" /> Antibiotic</li>
+    </ul>
+  </div>
+
+  <!-- Wellness Journal -->
+  <div class="card">
+    <h2>Wellness Journal</h2>
+    <textarea id="journal" rows="5" placeholder="Write your thoughts, progress or feelings..."></textarea>
+    <button onclick="saveJournal()">Save Entry</button>
+  </div>
+
+  <!-- Random Health Tip -->
+  <div class="card">
+    <h2>Daily Health Tip</h2>
+    <div class="tip-box" id="healthTip">
+      Click the button to get your health tip.
+    </div>
+    <button onclick="showTip()">Show Tip</button>
+  </div>
+
+</div>
+
+<script>
+  function saveCheckIn() {
+    const mood = document.getElementById("mood").value;
+    const energy = document.getElementById("energy").value;
+    const symptoms = document.getElementById("symptoms").value;
+
+    alert(`✅ Check-In Saved!\nMood: ${mood}\nEnergy: ${energy}\nSymptoms: ${symptoms || "None"}`);
+  }
+
+  function saveJournal() {
+    const entry = document.getElementById("journal").value;
+    if (entry.trim() === "") {
+      alert("Please write something in the journal.");
+    } else {
+      alert("📘 Journal entry saved!");
+      document.getElementById("journal").value = "";
+    }
+  }
+
+  function showTip() {
+    const tips = [
+      "💧 Stay hydrated! Drink at least 8 glasses of water a day.",
+      "🏃‍♂️ Move your body — 30 minutes of walking daily helps a lot!",
+      "😴 Prioritize sleep — aim for 7-8 hours per night.",
+      "🧠 Mental health matters — take deep breaths and practice gratitude.",
+      "🥗 Eat colorful fruits and veggies for vitamins and energy."
+    ];
+    const randomTip = tips[Math.floor(Math.random() * tips.length)];
+    document.getElementById("healthTip").innerText = randomTip;
+  }
+</script>
+
+</body>
+</html>
